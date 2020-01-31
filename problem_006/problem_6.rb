@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 # find the diff
 # between the sum of the squares
 # of the first hundred natural numbers

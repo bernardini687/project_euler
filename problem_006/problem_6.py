@@ -5,11 +5,11 @@ of the first hundred natural numbers
 and the square of the sum.
 """
 
-import functools
+from functools import reduce
 
 PROBLEM_SIZE = 100
 SUM = lambda acc, n: acc + n
-SUM_SQRS = lambda acc, n: acc + n**2
+SUM_SQRS = lambda acc, n: acc + n ** 2
 
 def solution(size=PROBLEM_SIZE):
     """
@@ -21,14 +21,14 @@ def sqr_of_sum(custom_size):
     """
     calc the sqr of the sum of `custom_size` natural nums.
     """
-    sum_of_nums = functools.reduce(SUM, nums_upto(custom_size))
-    return sum_of_nums**2
+    sum_of_nums = reduce(SUM, nums_upto(custom_size))
+    return sum_of_nums ** 2
 
 def sum_of_sqrs(custom_size):
     """
     calc the sum of the sqrs of `custom_size` natural nums.
     """
-    return functools.reduce(SUM_SQRS, nums_upto(custom_size))
+    return reduce(SUM_SQRS, nums_upto(custom_size))
 
 def nums_upto(size):
     """
