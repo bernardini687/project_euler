@@ -6,17 +6,22 @@
 # and the square of the sum.
 module Problem6
   PROBLEM_SIZE = 100
+  SUM = ->(acc, n) { acc + n }
+  SUM_SQRS = ->(acc, n) { acc + n.pow(2) }
 
-  def self.solution(size: PROBLEM_SIZE)
-    sqr_of_sum(size) - sum_of_sqrs(size)
-  end
+  class << self
+    def solution(size: PROBLEM_SIZE)
+      sum = apply_reduce(size, SUM)
+      sum_of_sqrs = apply_reduce(size, SUM_SQRS)
 
-  def self.sqr_of_sum(custom_size)
-    (1..custom_size).reduce(:+).pow(2)
-  end
+      sum * sum - sum_of_sqrs
+    end
 
-  def self.sum_of_sqrs(custom_size)
-    (1..custom_size).reduce { |acc, n| acc + n.pow(2) }
+    private
+
+    def apply_reduce(size, function)
+      (1..size).reduce(&function)
+    end
   end
 end
 
@@ -25,3 +30,19 @@ puts Problem6.solution
 
 puts Problem6.solution size: 10
 # => 2_640
+
+# module Problem6
+#   PROBLEM_SIZE = 100
+
+#   def self.solution(size: PROBLEM_SIZE)
+#     sqr_of_sum(size) - sum_of_sqrs(size)
+#   end
+
+#   def self.sqr_of_sum(custom_size)
+#     (1..custom_size).reduce(:+).pow(2)
+#   end
+
+#   def self.sum_of_sqrs(custom_size)
+#     (1..custom_size).reduce { |acc, n| acc + n.pow(2) }
+#   end
+# end
