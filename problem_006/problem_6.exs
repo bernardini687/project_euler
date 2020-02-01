@@ -8,22 +8,15 @@ defmodule Problem6 do
 
   @size 100
 
-  import Enum, only: [reduce: 3]
-
   def solution(size \\ @size) do
-    sum =
-      size
-      |> apply_reduce(&(&1 + &2))
+    sum_nums = reducer(size, &(&1 + &2))
+    sum_sqrs = reducer(size, &(&1 * &1 + &2))
 
-    sum_of_sqrs =
-      size
-      |> apply_reduce(&(&1 * &1 + &2))
-
-    sum * sum - sum_of_sqrs
+    sum_nums * sum_nums - sum_sqrs
   end
 
-  defp apply_reduce(size, function) do
-    reduce(1..size, 0, function)
+  defp reducer(size, function) do
+    Enum.reduce(1..size, 0, function)
   end
 end
 
