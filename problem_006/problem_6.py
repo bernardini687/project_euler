@@ -8,31 +8,19 @@ and the square of the sum.
 from functools import reduce
 
 PROBLEM_SIZE = 100
-SUM = lambda acc, n: acc + n
 SUM_SQRS = lambda acc, n: acc + n ** 2
 
 def solution(size=PROBLEM_SIZE):
     """
-    find the diff.
+    crunch the numbers and find the diff.
     """
-    return sqr_of_sum(size) - sum_of_sqrs(size)
-
-def sqr_of_sum(custom_size):
-    """
-    calc the sqr of the sum of `custom_size` natural nums.
-    """
-    sum_of_nums = reduce(SUM, nums_upto(custom_size))
-    return sum_of_nums ** 2
-
-def sum_of_sqrs(custom_size):
-    """
-    calc the sum of the sqrs of `custom_size` natural nums.
-    """
-    return reduce(SUM_SQRS, nums_upto(custom_size))
+    sum_nums = sum(nums_upto(size))
+    sum_sqrs = reduce(SUM_SQRS, nums_upto(size))
+    return sum_nums ** 2 - sum_sqrs
 
 def nums_upto(size):
     """
-    get a list size `size`.
+    get a list of natural numbers upto `size`.
     """
     return list(range(1, size + 1))
 
